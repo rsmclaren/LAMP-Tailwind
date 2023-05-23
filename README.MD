@@ -39,6 +39,6 @@ MYSQL_ROOT_PASSWORD = "your root password"
 ```
 
 ## bunlde and build css
-install required node modules using `npm install`
+install required node modules using `npm install` from the `src` directory
 
 to watch and build css run `npm run watch`
