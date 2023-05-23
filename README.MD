@@ -1,4 +1,4 @@
-# LAMP boilerplate
+# LAMP with Tailwind boilerplate
 
 ### local setup
 
@@ -8,10 +8,10 @@ run the below command to build the image, create and start the containers
 docker-compose up --build
 ```
 
-if image is already built use the following to start the containers
+if image is already built use the following to start the containers in detached mode
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 ## Docker services
@@ -37,3 +37,8 @@ your mysql root password must be set using a .env file.
 ```
 MYSQL_ROOT_PASSWORD = "your root password"
 ```
+
+## bunlde and build css
+install required node modules using `npm install`
+
+to watch and build css run `npm run watch`
