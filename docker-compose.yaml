@@ -6,7 +6,7 @@ services:
       context: .
     restart: always
     volumes:
-      - "./html/:/var/www/html/"
+      - "./src/:/var/www/html/"
       - "./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
       - ./ini/upload.ini:/usr/local/etc/php/conf.d/uploads.ini
     ports:
