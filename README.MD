@@ -38,7 +38,13 @@ your mysql root password must be set using a .env file.
 MYSQL_ROOT_PASSWORD = "your root password"
 ```
 
-## bunlde and build css
+## bundle and build css
 install required node modules using `npm install` from the `src` directory
 
 to watch and build css run `npm run watch`
+
+## ini
+The `upload.ini` can be used to control php upload settings
+
+## apache
+The `000-default.conf` file can be used to modify the default vhost settings for the apache server.
