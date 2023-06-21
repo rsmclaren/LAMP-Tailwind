@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "watch",
+			"path": "src",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: watch - src",
+			"detail": "webpack --config webpack.config.js"
+		},
+		{
+			"type": "npm",
+			"script": "install",
+			"path": "src",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: install",
+			"detail": "install npm deps"
+		}		
+	]
+}
