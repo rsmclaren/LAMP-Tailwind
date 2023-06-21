@@ -21,16 +21,17 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      #- ./database/db_name.sql:/docker-entrypoint-initdb.d/schema.sql:ro uncomment and update db_name.sql to import database
+      # uncomment and update db_name.sql to import database
+      #- ./database/db_name.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.0.1
+    image: phpmyadmin
     restart: always
     environment:
       PMA_HOST: mysql-server
       PMA_USER: root
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - "5000:80"
+      - "8080:80"
 volumes:
   mysql-data:
