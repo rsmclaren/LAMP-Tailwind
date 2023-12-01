@@ -1,6 +1,6 @@
 # LAMP with Tailwind boilerplate
 
-### local setup
+## local setup
 
 run the below command to build the image, create and start the containers
 
@@ -28,7 +28,7 @@ a mysql image built from DockerHub.
 
 ### phpmyadmin
 
-a phpmyadmin image built from DockerHub. Can be accessed from http://localhost:8080
+a phpmyadmin image built from DockerHub. Can be accessed from http://localhost:5000
 
 ### .env
 
@@ -38,19 +38,40 @@ your mysql root password must be set using a .env file.
 MYSQL_ROOT_PASSWORD = "your root password"
 ```
 
-You may copy the .env.sample file and rename it to .env
+## Local development
+
+### Using docker exec
+You can run commands from the web-server container using the `docker exec` command.
 
 ```bash
-cp .env.sample .env
+docker exec -it ws bash
+```
+the above command will open a bash shell in the `ws` container. `ws` is the name of the web-server container which can be found in the `docker-compose.yml` file.
+
+### Composer
+To run `composer install` from the web-server container use the following command
+
+```bash
+docker exec -it ws composer install
+```
+the above command executes the `composer install` command from the `ws` container. 
+
+### bundle and build css
+Required node modules can be installed using `npm install`. Can use the following docker exec command to install the modules.
+
+```bash
+docker exec -it ws npm install
 ```
 
-## bundle and build css
-install required node modules using `npm install` from the `src` directory
+to watch and build css run `npm run watch`. Can use the following docker exec command to run the command in the `ws` container.
+    
+```bash
+docker exec -it ws npm run watch
+```
 
-to watch and build css run `npm run watch`
+### ini
+- `ini/upload.ini` can be used to control php upload settings
+- `ini/xdebug.ini` can be used to control xdebug settings
 
-## ini
-The `upload.ini` can be used to control php upload settings
-
-## apache
-The `000-default.conf` file can be used to modify the default conf file for the apache server.
+### apache
+The `apache/000-default.conf` file can be used to modify the default vhost settings for the apache server.

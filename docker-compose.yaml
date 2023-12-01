@@ -1,6 +1,7 @@
 version: "3.7"
 services:
   web-server:
+    container_name: ws
     build:
       dockerfile: php.Dockerfile
       context: .
@@ -9,6 +10,7 @@ services:
       - "./src/:/var/www/html/"
       - "./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
       - ./ini/upload.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./ini/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     ports:
       - "80:80"
 
@@ -17,15 +19,16 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: db_name
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      # uncomment and update db_name.sql to import database
-      #- ./database/db_name.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      # uncomment below line to automatically import database
+      # - ./database/my-db.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.0.1
     restart: always
     environment:
       PMA_HOST: mysql-server
@@ -33,5 +36,6 @@ services:
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "8080:80"
+      
 volumes:
   mysql-data:
