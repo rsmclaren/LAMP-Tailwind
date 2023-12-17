@@ -6,9 +6,28 @@ module.exports = {
   context: path.resolve(__dirname, "assets"),
   output: {
     filename: "main.bundle.js",
-    path: path.resolve(__dirname, "public/assets/dist")
+    path: path.resolve(__dirname, "public/assets"),
+    publicPath: 'http://localhost/assets/', // needed for webpack-dev-server
   },
-  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+  },
+  devServer: {
+    host: '0.0.0.0', // needed for docker
+    port: '3000', // this must match the 2nd exposed port in the docker-compose.yml file
+    hot: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    watchFiles: {
+      paths: ['public/**/*'],
+      options: {
+        usePolling: true,
+      }
+    },
+  },
+  // watch: true,
   plugins: [
     new MiniCssExtractPlugin(),
   ],
