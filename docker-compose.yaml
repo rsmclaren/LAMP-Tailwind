@@ -13,6 +13,7 @@ services:
       - ./ini/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     ports:
       - "80:80"
+      - "3000:3000" #needed for exposing webpack dev server
 
   mysql-server:
     image: mysql:8.0.19
@@ -36,6 +37,6 @@ services:
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "8080:80"
-      
+
 volumes:
   mysql-data:
