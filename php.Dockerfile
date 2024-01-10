@@ -17,5 +17,19 @@ RUN apt-get update && apt-get install -y libicu-dev git zip \
 	  && docker-php-ext-enable xdebug \
     && a2enmod rewrite
 
+ARG UID
+ARG GID
+
+ENV UID=${UID}
+ENV GID=${GID}
+
+RUN groupadd -g ${GID} php && \
+    useradd -g php -u ${UID} -s /bin/sh -m php
+
+RUN sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=php/g' /etc/apache2/envvars
+RUN sed -i 's/export APACHE_RUN_GROUP=www-data/export APACHE_RUN_GROUP=php/g' /etc/apache2/envvars
+
+USER php
+
 # Install Composer and copy to php bin path, making it globally available
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer

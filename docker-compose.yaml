@@ -5,6 +5,9 @@ services:
     build:
       dockerfile: php.Dockerfile
       context: .
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
     restart: always
     volumes:
       - "./src/:/var/www/html/"
@@ -36,6 +39,6 @@ services:
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "8080:80"
-      
+
 volumes:
   mysql-data:
